@@ -9,11 +9,22 @@ public static class Arrays
     public static double[] MultiplesOf(double number, int length)
     {
         // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Plan:
+        // 1. Create a new double array of size 'length' to hold the results.
+        // 2. Loop from index 0 to length - 1.
+        // 3. At each index i, the multiple is number * (i + 1).
+        //    e.g. index 0 → number * 1, index 1 → number * 2, etc.
+        // 4. Store each computed multiple in the array at position i.
+        // 5. Return the completed array.
 
-        return []; // replace this return statement with your own
+        double[] result = new double[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            result[i] = number * (i + 1);
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -26,8 +37,28 @@ public static class Arrays
     public static void RotateListRight(List<int> data, int amount)
     {
         // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Plan:
+        // Rotating right by 'amount' means the last 'amount' elements move to the front.
+        // Example: {1,2,3,4,5,6,7,8,9} rotated right by 3 → {7,8,9,1,2,3,4,5,6}
+        //   - The last 3 elements are {7, 8, 9}
+        //   - The remaining first elements are {1, 2, 3, 4, 5, 6}
+        //
+        // Steps:
+        // 1. Calculate the split index: data.Count - amount
+        //    This is where the "tail" (elements to move to front) begins.
+        // 2. Use GetRange to extract the tail: elements from splitIndex to end.
+        // 3. Use GetRange to extract the head: elements from 0 to splitIndex.
+        // 4. Clear the original list.
+        // 5. AddRange the tail first, then the head.
+        //    This produces the rotated result in-place.
+
+        int splitIndex = data.Count - amount;
+
+        List<int> tail = data.GetRange(splitIndex, amount);       // last 'amount' elements
+        List<int> head = data.GetRange(0, splitIndex);            // remaining front elements
+
+        data.Clear();
+        data.AddRange(tail);   // tail goes first (moved to front)
+        data.AddRange(head);   // head follows
     }
 }
