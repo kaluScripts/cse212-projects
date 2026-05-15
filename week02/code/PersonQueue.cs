@@ -13,7 +13,9 @@ public class PersonQueue
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        _queue.Add(person); // Bug fix: was Insert(0, person) which added to the FRONT,
+                            // causing the queue to act like a stack (LIFO). New people
+                            // must be added to the BACK to maintain FIFO order.
     }
 
     public Person Dequeue()
